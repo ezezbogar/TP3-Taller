@@ -4,9 +4,11 @@
 #include "server_petition.h"
 
 class PetitionPost : public Petition {
+private:
+    int msgLen;
 public:
     /* Constructor */
-    PetitionPost(char* input, char* output);
+    PetitionPost(char* input, char* output, int msgLen);
 
     int solve() override;
 

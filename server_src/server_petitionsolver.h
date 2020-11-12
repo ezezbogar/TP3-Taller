@@ -1,28 +1,21 @@
 #ifndef PETITIONSOLVER_H_
 #define PETITIONSOLVER_H_
 
-#define MEMORY_SIZE 1024
-
 #include "server_petition.h"
 #include "server_petitionget.h"
 #include "server_petitionpost.h"
 #include "server_petitionother.h"
-#include "../common_src/common_socket.h"
-#include "server_thread.h"
 #include <string>
 
-class PetitionSolver : Thread {
+class PetitionSolver {
 private:
-
-    char input[MEMORY_SIZE];
-    char output[MEMORY_SIZE];
     Petition* petition;
 
 public:
     /* Constructor */
-    PetitionSolver(char* input, char* output, std::string resource);
+    PetitionSolver(char* input, char* output, std::string resource, int msgLen);
 
-    void solve();
+    int solve();
 
     /* Destructor */
     ~PetitionSolver();

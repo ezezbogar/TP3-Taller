@@ -12,10 +12,21 @@ Socket::Socket(int Fd) {
     this->fd = Fd;
 }
 
+Socket::Socket(Socket &&skt) noexcept {
+    this->fd = skt.fd;
+    skt.fd = -1;
+}
+
+Socket& Socket::operator=(Socket&& skt)  noexcept {
+    this->fd = skt.fd;
+    skt.fd = -1;
+    return *this;
+}
+
 void Socket::bind(const char *port) {
     struct addrinfo* rp = _getAddrInfo(port);
 
-    for (rp; rp != NULL; rp = rp->ai_next) {
+    for (; rp != NULL; rp = rp->ai_next) {
         this->fd = ::socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
         if (this->fd == -1) {
@@ -38,7 +49,7 @@ void Socket::bind(const char *port) {
 void Socket::connect(const char *host, const char *port) {
     struct addrinfo* rp = _getAddrInfo(host, port);
 
-    for (rp; rp != NULL; rp = rp->ai_next) {
+    for (; rp != NULL; rp = rp->ai_next) {
         this->fd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
         if (this->fd == -1) {

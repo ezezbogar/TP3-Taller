@@ -6,7 +6,9 @@
 #define SMALL_BUF_SIZE 8
 #define ERROR -1
 
-PetitionPost::PetitionPost(char* input, char* output) : Petition(input, output) {}
+PetitionPost::PetitionPost(char* input, char* output, int msgLen) : Petition(input, output) {
+    this->msgLen = msgLen;
+}
 
 int PetitionPost::solve() {
 
@@ -25,9 +27,9 @@ int PetitionPost::_emptyPost() {
 }
 
 int PetitionPost::_postResource() {
-    char response[] = "HTTP/1.1 200 OK\n\n";
-    int bodySize = _getBodySize();
-    bool newLine = false;
+    //char response[] = "HTTP/1.1 200 OK\n\n";
+    //int bodySize = _getBodySize();
+    //bool newLine = false;
     return 0;
 
 }
@@ -46,7 +48,7 @@ int PetitionPost::_getBodySize() {
         } else {
             buf[pos] = c;
         }
-        if (pos == strlen(cmp) && strncmp(buf, cmp, strlen(cmp)) == 0){
+        if (pos == static_cast<int>(strlen(cmp)) && strncmp(buf, cmp, strlen(cmp)) == 0){
             return _getNumberBodySize(i);
         }
     }

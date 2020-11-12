@@ -3,6 +3,7 @@
 
 #include "../common_src/common_socket.h"
 #include "server_thread.h"
+#include "server_messenger.h"
 #include <vector>
 #include <atomic>
 
@@ -14,7 +15,6 @@ private:
     std::string rootFile;
 
     std::atomic<bool> endAccepting;
-    int totalClients;
 
 public:
     Server(std::string rootFile);
@@ -29,7 +29,11 @@ private:
 
     void _acceptClients();
 
-    void _createClient();
+    void _createClient(Socket& peer);
+
+    void _deleteFinishedClients();
+
+    void _deleteAllClients();
 
     void _end();
 };

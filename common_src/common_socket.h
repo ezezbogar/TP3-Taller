@@ -16,6 +16,12 @@ public:
     /* Constructor */
     Socket();
 
+    /* Constructor por movimiento */
+    Socket(Socket&& skt) noexcept;
+
+    /* Asignacion por movimiento */
+    Socket& operator=(Socket&& skt) noexcept;
+
     void bind(const char *port);
 
     void connect(const char *host, const char *port);
