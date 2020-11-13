@@ -8,9 +8,29 @@ PetitionOther::PetitionOther(char* input,
 
 int PetitionOther::solve() {
     char response[] = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n";
+    char responseEnd[] = " es un comando desconocido\n";
     snprintf(this->output, strlen(response) + 1,
              "HTTP/1.1 405 METHOD NOT ALLOWED\n\n");
-    return strlen(response);
+    int pos = 0;
+    do {
+        pos++;
+    } while (this->input[pos] != ' ');
+    for (int i = 0; i < pos; i++) {
+        this->output[i + strlen(response)] = this->input[i];
+    }
+    snprintf(this->output + strlen(response) + pos,
+             strlen(responseEnd) + 1,
+             " es un comando desconocido\n");
+    return strlen(response) + pos + strlen(responseEnd);
+}
+
+std::string PetitionOther::_getMethodName() {
+    int pos = 0;
+    do {
+        pos++;
+    } while (this->input[pos] != ' ');
+    std::string name(this->input, pos);
+    return name;
 }
 
 PetitionOther::~PetitionOther() {}

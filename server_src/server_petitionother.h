@@ -2,6 +2,7 @@
 #define SERVER_SRC_SERVER_PETITIONOTHER_H_
 
 #include "server_petition.h"
+#include <string>
 
 class PetitionOther : public Petition {
  public:
@@ -12,6 +13,9 @@ class PetitionOther : public Petition {
 
     /* Destructor */
     ~PetitionOther();
+
+private:
+    std::string _getMethodName();
 };
 
 #endif  // SERVER_SRC_SERVER_PETITIONOTHER_H_
