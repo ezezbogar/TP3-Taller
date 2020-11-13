@@ -13,9 +13,6 @@ class PetitionOther : public Petition {
 
     /* Destructor */
     ~PetitionOther();
-
-private:
-    std::string _getMethodName();
 };
 
 #endif  // SERVER_SRC_SERVER_PETITIONOTHER_H_

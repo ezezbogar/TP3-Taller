@@ -24,13 +24,4 @@ int PetitionOther::solve() {
     return strlen(response) + pos + strlen(responseEnd);
 }
 
-std::string PetitionOther::_getMethodName() {
-    int pos = 0;
-    do {
-        pos++;
-    } while (this->input[pos] != ' ');
-    std::string name(this->input, pos);
-    return name;
-}
-
 PetitionOther::~PetitionOther() {}
