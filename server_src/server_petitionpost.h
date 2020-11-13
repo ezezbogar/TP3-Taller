@@ -7,6 +7,7 @@
 class PetitionPost : public Petition {
  private:
     int msgLen;
+    
  public:
     /* Constructor */
     PetitionPost(char* input, char* output, int msgLen);
