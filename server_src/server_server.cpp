@@ -1,10 +1,12 @@
 #include "server_server.h"
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <utility>
 
 #define ENDING_CHAR 'q'
 
-Server::Server(std::string rootFile) {
+Server::Server(const std::string& rootFile) {
     this->endAccepting = false;
     this->rootFile = rootFile;
 }

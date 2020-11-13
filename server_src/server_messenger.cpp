@@ -1,10 +1,16 @@
 #include "server_messenger.h"
 #include <iostream>
+#include <string>
+#include <utility>
 
-Messenger::Messenger(std::string rootFile, Socket&& peer) {
+#define MEMORY_SIZE 1024
+
+Messenger::Messenger(const std::string& rootFile, Socket&& peer) {
     this->peer = std::move(peer);
     this->rootFile = rootFile;
     this->clientFinished = false;
+    this->input = new char[MEMORY_SIZE];
+    this->output = new char[MEMORY_SIZE];
 }
 
 void Messenger::solve() {
@@ -34,4 +40,7 @@ bool Messenger::finished() {
     return this->clientFinished;
 }
 
-Messenger::~Messenger() {}
+Messenger::~Messenger() {
+    delete[] this->input;
+    delete[] this->output;
+}

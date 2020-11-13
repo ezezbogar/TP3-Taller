@@ -1,5 +1,6 @@
 #include "server_petitionother.h"
 #include <cstring>
+#include <cstdio>
 
 PetitionOther::PetitionOther(char* input,
                              char* output) :
@@ -7,7 +8,7 @@ PetitionOther::PetitionOther(char* input,
 
 int PetitionOther::solve() {
     char response[] = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n";
-    strcpy(this->output, response);
+    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 405 METHOD NOT ALLOWED\n\n");
     return strlen(response);
 }
 

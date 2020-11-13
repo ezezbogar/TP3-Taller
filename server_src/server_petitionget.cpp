@@ -4,7 +4,7 @@
 
 PetitionGet::PetitionGet(char* input,
                          char* output,
-                         std::string resource) :
+                         const std::string& resource) :
                          Petition(input, output) {
     this->resource = resource;
 }
@@ -21,7 +21,7 @@ int PetitionGet::loadRootResource() {
     char c;
     int len = 0;
     char response[] = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
-    strcpy(this->output, response);
+    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n");
     std::fstream root;
     root.open(this->resource);
 
@@ -34,13 +34,12 @@ int PetitionGet::loadRootResource() {
 }
 
 int PetitionGet::loadRequest() {
-    char c;
-    int len = 0;
     std::string resourceName = _getResourceName();
-    char responseOk[] = "HTTP/1.1 200 OK\n\n";
-    char responseFail[] = "HTTP/1.1 404 NOT FOUND\n\n";
     if (std::ifstream(resourceName)) {
-        strcpy(this->output, responseOk);
+        char c;
+        int len = 0;
+        char responseOk[] = "HTTP/1.1 200 OK\n\n";
+        snprintf(this->output, strlen(responseOk) + 1, "HTTP/1.1 200 OK\n\n");
         std::fstream root;
         root.open(resourceName);
         while (root.get(c)) {
@@ -50,7 +49,8 @@ int PetitionGet::loadRequest() {
         root.close();
         return strlen(responseOk) + len;
     } else {
-        strcpy(this->output, responseFail);
+        char responseFail[] = "HTTP/1.1 404 NOT FOUND\n\n";
+        snprintf(this->output, strlen(responseFail) + 1, "HTTP/1.1 404 NOT FOUND\n\n");
         return strlen(responseFail);
     }
 }

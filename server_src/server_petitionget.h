@@ -9,7 +9,7 @@ class PetitionGet : public Petition {
     std::string resource;
  public:
     /* Constructor */
-    PetitionGet(char* input, char* output, std::string resource);
+    PetitionGet(char* input, char* output, const std::string& resource);
 
     int solve() override;
 

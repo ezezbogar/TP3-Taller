@@ -45,7 +45,7 @@ class Socket {
     ~Socket();
 
  private:
-    Socket(int Fd);
+    explicit Socket(int Fd);
 
     /* Cliente */
     struct addrinfo* _getAddrInfo(const char *host, const char *port);

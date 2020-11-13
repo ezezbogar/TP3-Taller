@@ -6,6 +6,7 @@
 #include "server_messenger.h"
 #include <vector>
 #include <atomic>
+#include <string>
 
 class Server {
  private:
@@ -17,7 +18,7 @@ class Server {
     std::atomic<bool> endAccepting;
 
  public:
-    Server(std::string rootFile);
+    explicit Server(const std::string& rootFile);
 
     void run(const char* port);
 

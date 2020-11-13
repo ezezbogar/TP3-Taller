@@ -9,7 +9,8 @@ int main(int argc, char** argv) {
     }
     try {
         // Ejecutar
-        Server server(std::string(argv[2], strlen(argv[2])));
+        std::string rootFile = std::string(argv[2], strlen(argv[2]));
+        Server server(rootFile);
         server.run(argv[1]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;

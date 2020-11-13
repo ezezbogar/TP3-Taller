@@ -1,11 +1,12 @@
 #ifndef SERVER_SRC_SERVER_MESSENGER_H_
 #define SERVER_SRC_SERVER_MESSENGER_H_
 
-#define MEMORY_SIZE 1024
+
 
 #include "server_petitionsolver.h"
 #include "server_thread.h"
 #include "../common_src/common_socket.h"
+#include <string>
 
 class Messenger : public Thread {
  private:
@@ -13,11 +14,12 @@ class Messenger : public Thread {
     std::string rootFile;
     bool clientFinished;
 
-    char input[MEMORY_SIZE];
-    char output[MEMORY_SIZE];
+    char* input;
+    char* output;
+
  public:
     /* Constructor */
-    Messenger(std::string rootFile, Socket&& peer);
+    Messenger(const std::string& rootFile, Socket&& peer);
 
     void solve() override;
 
