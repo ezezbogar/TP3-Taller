@@ -21,12 +21,15 @@ class Server {
     explicit Server(const std::string& rootFile);
 
     /* Comienza la ejecucion del server */
-    void run(const char* port);
+    void operator()(const char* port);
 
     /* Destructor */
     ~Server();
 
  private:
+    /* Ejecuta el server */
+    void _run(const char* port);
+
     /* Lee la entrada estandar hasta que se introduce el
      * caracter finalizador */
     void _getEndChar();

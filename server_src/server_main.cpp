@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         // Ejecutar
         std::string rootFile = std::string(argv[2], strlen(argv[2]));
         Server server(rootFile);
-        server.run(argv[1]);
+        server(argv[1]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 1;

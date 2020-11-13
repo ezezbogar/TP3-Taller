@@ -11,7 +11,11 @@ Server::Server(const std::string& rootFile) {
     this->rootFile = rootFile;
 }
 
-void Server::run(const char *port) {
+void Server::operator()(const char *port) {
+    this->_run(port);
+}
+
+void Server::_run(const char *port) {
     this->bindingSkt.bind(port);
     this->bindingSkt.listen();
     this->endCharThread = std::thread(&Server::_getEndChar, this);
