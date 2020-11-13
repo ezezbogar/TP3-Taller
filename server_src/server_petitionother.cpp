@@ -8,7 +8,8 @@ PetitionOther::PetitionOther(char* input,
 
 int PetitionOther::solve() {
     char response[] = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n";
-    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 405 METHOD NOT ALLOWED\n\n");
+    snprintf(this->output, strlen(response) + 1,
+             "HTTP/1.1 405 METHOD NOT ALLOWED\n\n");
     return strlen(response);
 }
 

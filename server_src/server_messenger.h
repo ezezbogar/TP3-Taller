@@ -21,6 +21,12 @@ class Messenger : public Thread {
     /* Constructor */
     Messenger(const std::string& rootFile, Socket&& peer);
 
+    /* Constructor por copia borrado*/
+    Messenger(const Messenger& messenger) = delete;
+
+    /* Asignacion por copia borrado*/
+    Messenger operator=(const Messenger& messenger) = delete;
+
     void solve() override;
 
     bool finished() override;

@@ -21,7 +21,8 @@ int PetitionGet::loadRootResource() {
     char c;
     int len = 0;
     char response[] = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
-    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n");
+    snprintf(this->output, strlen(response) + 1,
+             "HTTP/1.1 200 OK\nContent-Type: text/html\n\n");
     std::fstream root;
     root.open(this->resource);
 
@@ -50,7 +51,8 @@ int PetitionGet::loadRequest() {
         return strlen(responseOk) + len;
     } else {
         char responseFail[] = "HTTP/1.1 404 NOT FOUND\n\n";
-        snprintf(this->output, strlen(responseFail) + 1, "HTTP/1.1 404 NOT FOUND\n\n");
+        snprintf(this->output, strlen(responseFail) + 1,
+                 "HTTP/1.1 404 NOT FOUND\n\n");
         return strlen(responseFail);
     }
 }
