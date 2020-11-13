@@ -15,6 +15,12 @@ class PetitionSolver {
     /* Constructor */
     PetitionSolver(char* input, char* output, std::string resource, int msgLen);
 
+    /* Constructor por copia borrado*/
+    PetitionSolver(const PetitionSolver& petitionSolver) = delete;
+
+    /* Asignacion por copia borrado*/
+    PetitionSolver operator=(const PetitionSolver& petitionSolver) = delete;
+
     int solve();
 
     /* Destructor */
