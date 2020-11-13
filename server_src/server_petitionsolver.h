@@ -1,5 +1,5 @@
-#ifndef PETITIONSOLVER_H_
-#define PETITIONSOLVER_H_
+#ifndef SERVER_SRC_SERVER_PETITIONSOLVER_H_
+#define SERVER_SRC_SERVER_PETITIONSOLVER_H_
 
 #include "server_petition.h"
 #include "server_petitionget.h"
@@ -8,10 +8,10 @@
 #include <string>
 
 class PetitionSolver {
-private:
+ private:
     Petition* petition;
 
-public:
+ public:
     /* Constructor */
     PetitionSolver(char* input, char* output, std::string resource, int msgLen);
 
@@ -20,8 +20,8 @@ public:
     /* Destructor */
     ~PetitionSolver();
 
-private:
+ private:
     int _getPetitionType(const char* input);
 };
 
-#endif  // PETITIONSOLVER_H_
+#endif  // SERVER_SRC_SERVER_PETITIONSOLVER_H_

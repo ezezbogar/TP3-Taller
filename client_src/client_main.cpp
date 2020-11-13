@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
         std::cerr << "Error: argumentos invalidos." << std::endl;
         return 1;
     }
-    try{
+    try {
         Client client(argv[1], argv[2]);
         client.sendPetition();
         client.receiveReply();
@@ -19,5 +19,3 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
-
-/*g++ client_src/client_main.cpp common_src/common_socket.cpp common_src/common_socket_exception.cpp client_src/client_client.cpp */

@@ -5,7 +5,10 @@
 #define POST 2
 #define OTHER 3
 
-PetitionSolver::PetitionSolver(char* input, char* output, std::string resource, int msgLen) {
+PetitionSolver::PetitionSolver(char* input,
+                               char* output,
+                               std::string resource,
+                               int msgLen) {
     int petitionType = _getPetitionType(input);
     if (petitionType == GET) {
         this->petition = new PetitionGet(input, output, resource);
@@ -14,8 +17,6 @@ PetitionSolver::PetitionSolver(char* input, char* output, std::string resource, 
     } else if (petitionType == OTHER) {
         this->petition = new PetitionOther(input, output);
     }
-
-
 }
 
 int PetitionSolver::solve() {

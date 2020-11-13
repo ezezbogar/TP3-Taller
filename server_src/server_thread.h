@@ -1,5 +1,5 @@
-#ifndef THREAD_H_
-#define THREAD_H_
+#ifndef SERVER_SRC_SERVER_THREAD_H_
+#define SERVER_SRC_SERVER_THREAD_H_
 
 #include <thread>
 
@@ -28,4 +28,4 @@ class Thread {
     virtual ~Thread();
 };
 
-#endif  // THREAD_H_
+#endif  // SERVER_SRC_SERVER_THREAD_H_

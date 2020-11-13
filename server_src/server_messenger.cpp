@@ -1,5 +1,5 @@
 #include "server_messenger.h"
-#include <iostream>//borrar
+#include <iostream>
 
 Messenger::Messenger(std::string rootFile, Socket&& peer) {
     this->peer = std::move(peer);
@@ -8,12 +8,26 @@ Messenger::Messenger(std::string rootFile, Socket&& peer) {
 }
 
 void Messenger::solve() {
-    std::cout << "New Client!" << std::endl;//borrar
+    int replyLen;
     int msgLen = this->peer.receive(this->input, MEMORY_SIZE);
-    PetitionSolver(this->input, this->output, this->rootFile, msgLen); //debe devolver un entero para saber
-    //la cantidad de bytes que tengoo que enviar
+    _printFirstLine();
+
+    PetitionSolver petitionSolver(this->input,
+                                  this->output, this->rootFile, msgLen);
+    replyLen = petitionSolver.solve();
+    this->peer.send(this->output, replyLen);
+    this->peer.ShutDownWR();
 
     this->clientFinished = true;
+}
+
+void Messenger::_printFirstLine() {
+    int i = 0;
+    while (this->input[i] != '\n') {
+        std::cout << this->input[i];
+        i++;
+    }
+    std::cout << std::endl;
 }
 
 bool Messenger::finished() {

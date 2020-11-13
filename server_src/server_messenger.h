@@ -1,5 +1,5 @@
-#ifndef MESSENGER_H_
-#define MESSENGER_H_
+#ifndef SERVER_SRC_SERVER_MESSENGER_H_
+#define SERVER_SRC_SERVER_MESSENGER_H_
 
 #define MEMORY_SIZE 1024
 
@@ -8,14 +8,14 @@
 #include "../common_src/common_socket.h"
 
 class Messenger : public Thread {
-private:
+ private:
     Socket peer;
     std::string rootFile;
     bool clientFinished;
 
     char input[MEMORY_SIZE];
     char output[MEMORY_SIZE];
-public:
+ public:
     /* Constructor */
     Messenger(std::string rootFile, Socket&& peer);
 
@@ -25,6 +25,10 @@ public:
 
     /* Destructor */
     ~Messenger();
+
+ private:
+    /* Imprime la primer linea del petitorio */
+    void _printFirstLine();
 };
 
-#endif  // MESSENGER_H_
+#endif  // SERVER_SRC_SERVER_MESSENGER_H_

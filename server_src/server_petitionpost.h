@@ -2,6 +2,7 @@
 #define PETITIONPOST_H_
 
 #include "server_petition.h"
+#include <string>
 
 class PetitionPost : public Petition {
 private:
@@ -18,8 +19,8 @@ public:
 private:
     int _emptyPost();
     int _postResource();
-    int _getBodySize();
-    int _getNumberBodySize(int position);
+    void _writeFile(int bodyStart, std::string fileName, int headerLen);
+    std::string _getPostName();
 };
 
 #endif  // PETITIONPOST_H_

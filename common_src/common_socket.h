@@ -1,5 +1,5 @@
-#ifndef COMMON_SOCKET_H_
-#define COMMON_SOCKET_H_
+#ifndef COMMON_SRC_COMMON_SOCKET_H_
+#define COMMON_SRC_COMMON_SOCKET_H_
 
 #include "../common_src/common_socket_exception.h"
 #include <sys/types.h>
@@ -9,10 +9,10 @@
 
 
 class Socket {
-private:
+ private:
     int fd;
 
-public:
+ public:
     /* Constructor */
     Socket();
 
@@ -24,7 +24,7 @@ public:
 
     void bind(const char *port);
 
-    void connect(const char *host, const char *port);
+    bool connect(const char *host, const char *port);
 
     Socket accept() const;
 
@@ -34,13 +34,17 @@ public:
 
     void listen();
 
+    void ShutDownWR();
+
+    void ShutDownRD();
+
     void close();
 
     bool isValid();
 
     ~Socket();
 
-private:
+ private:
     Socket(int Fd);
 
     /* Cliente */
@@ -49,4 +53,4 @@ private:
     /* Server */
     struct addrinfo* _getAddrInfo(const char *port);
 };
-#endif  // COMMON_SOCKET_H_
+#endif  // COMMON_SRC_COMMON_SOCKET_H_

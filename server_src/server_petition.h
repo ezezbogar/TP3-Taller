@@ -1,12 +1,12 @@
-#ifndef PETITION_H_
-#define PETITION_H_
+#ifndef SERVER_SRC_SERVER_PETITION_H_
+#define SERVER_SRC_SERVER_PETITION_H_
 
 class Petition {
-protected:
+ protected:
     char* input;
     char* output;
 
-public:
+ public:
     /* Constructor */
     Petition(char* input, char* output);
 
@@ -16,4 +16,4 @@ public:
     virtual ~Petition();
 };
 
-#endif  // PETITION_H_
+#endif  // SERVER_SRC_SERVER_PETITION_H_

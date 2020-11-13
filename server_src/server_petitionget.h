@@ -1,13 +1,13 @@
-#ifndef PETITIONGET_H_
-#define PETITIONGET_H_
+#ifndef SERVER_SRC_SERVER_PETITIONGET_H_
+#define SERVER_SRC_SERVER_PETITIONGET_H_
 
 #include "server_petition.h"
 #include <string>
 
 class PetitionGet : public Petition {
-private:
+ private:
     std::string resource;
-public:
+ public:
     /* Constructor */
     PetitionGet(char* input, char* output, std::string resource);
 
@@ -16,10 +16,10 @@ public:
     /* Destructor */
     ~PetitionGet();
 
-private:
+ private:
     int loadRootResource();
     int loadRequest();
     std::string _getResourceName();
 };
 
-#endif  // PETITIONGET_H_
+#endif  // SERVER_SRC_SERVER_PETITIONGET_H_

@@ -1,18 +1,12 @@
 #include "server_petitionpost.h"
-#include <iostream>//borrar
+#include <fstream>
 #include <cstring>
-
-#define BUF_SIZE 128
-#define SMALL_BUF_SIZE 8
-#define ERROR -1
 
 PetitionPost::PetitionPost(char* input, char* output, int msgLen) : Petition(input, output) {
     this->msgLen = msgLen;
 }
 
 int PetitionPost::solve() {
-
-    std::cout << "petitionpost" <<std::endl;//borrar
     if (this->input[6] == ' ') {
         return _emptyPost();
     } else {
@@ -22,50 +16,49 @@ int PetitionPost::solve() {
 
 int PetitionPost::_emptyPost() {
     char response[] = "HTTP/1.1 403 FORBIDDEN\n\n";
-    strncpy(this->output, response, strlen(response));
+    strcpy(this->output, response);
     return strlen(response);
 }
 
 int PetitionPost::_postResource() {
-    //char response[] = "HTTP/1.1 200 OK\n\n";
-    //int bodySize = _getBodySize();
-    //bool newLine = false;
-    return 0;
+    char response[] = "HTTP/1.1 200 OK\n\n";
+    std::string fileName = _getPostName();
+    bool newLine = false;
+    strcpy(this->output, response);
+    int bodyBegin = 0;
 
-}
-
-int PetitionPost::_getBodySize() {
-    char cmp[] = "Content-Length";
-    char c, buf[BUF_SIZE];
-    int pos = 0, i = 0;
-    bool lenFound = false;
-    while (!lenFound) {
-        c = this->input[i];
-        pos++;
-        i++;
-        if (c == '\n') {
-            pos = 0;
+    for (int i = 0; i < this->msgLen; i++) {
+        if (this->input[i] == '\n' && newLine == true) {
+            _writeFile(i + 1, fileName, strlen(response));
+            bodyBegin = i +1;
+            break;
+        } else if (this->input[i] == '\n') {
+            newLine = true;
         } else {
-            buf[pos] = c;
-        }
-        if (pos == static_cast<int>(strlen(cmp)) && strncmp(buf, cmp, strlen(cmp)) == 0){
-            return _getNumberBodySize(i);
+            newLine = false;
         }
     }
-    return ERROR;
+    return (strlen(response) + this->msgLen - bodyBegin);
 }
 
-int PetitionPost::_getNumberBodySize(int position) {
-    char buf[SMALL_BUF_SIZE], c;
-    int posBuf = 0;
+void PetitionPost::_writeFile(int bodyStart, std::string fileName, int headerLen) {
+    std::ofstream post;
+    post.open(fileName);
+    for (int i = 0; i < this->msgLen - bodyStart; i++) {
+        post << this->input[i + bodyStart];
+        this->output[headerLen + i] = this->input[i + bodyStart];
+    }
+    post.close();
+}
+
+std::string PetitionPost::_getPostName() {
+    int pos = 6, len = 0;
     do {
-        c = this->input[position];
-        buf[posBuf] = c;
-        posBuf++;
-        position++;
-    } while (c != ' ');
-    buf[posBuf + 1] = '\0';
-    return atoi(buf);
+        len++;
+        pos++;
+    } while (this->input[pos] != ' ');
+    std::string name(this->input + 6, len);
+    return name;
 }
 
 PetitionPost::~PetitionPost() {}

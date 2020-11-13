@@ -1,10 +1,10 @@
-#ifndef PETITIONOTHER_H_
-#define PETITIONOTHER_H_
+#ifndef SERVER_SRC_SERVER_PETITIONOTHER_H_
+#define SERVER_SRC_SERVER_PETITIONOTHER_H_
 
 #include "server_petition.h"
 
 class PetitionOther : public Petition {
-public:
+ public:
     /* Constructor */
     PetitionOther(char* input, char* output);
 
@@ -14,4 +14,4 @@ public:
     ~PetitionOther();
 };
 
-#endif  // PETITIONOTHER_H_
+#endif  // SERVER_SRC_SERVER_PETITIONOTHER_H_

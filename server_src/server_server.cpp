@@ -21,9 +21,9 @@ void Server::run(const char *port) {
 void Server::_acceptClients() {
     Socket peer;
     while (this->endAccepting == false) {
-        try{
+        try {
             peer = this->bindingSkt.accept();
-        } catch (const std::exception &e){}
+        } catch (const std::exception &e) {}
         if (peer.isValid()) {
             _createClient(peer);
         }
@@ -46,7 +46,9 @@ bool _clientHasFinished(Thread* client) {
 }
 
 void Server::_deleteFinishedClients() {
-    clients.erase(std::remove_if(clients.begin(), clients.end(), _clientHasFinished), clients.end());
+    clients.erase(std::remove_if
+    (clients.begin(), clients.end()
+     , _clientHasFinished), clients.end());
 }
 
 void Server::_deleteAllClients() {

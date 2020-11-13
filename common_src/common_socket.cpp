@@ -46,8 +46,9 @@ void Socket::bind(const char *port) {
     ::freeaddrinfo(rp);
 }
 
-void Socket::connect(const char *host, const char *port) {
+bool Socket::connect(const char *host, const char *port) {
     struct addrinfo* rp = _getAddrInfo(host, port);
+    int connected = false;
 
     for (; rp != NULL; rp = rp->ai_next) {
         this->fd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
@@ -58,10 +59,12 @@ void Socket::connect(const char *host, const char *port) {
             std::cout << strerror(errno) << std::endl;
             ::close(this->fd);
         } else {
+            connected = true;
             break;
         }
     }
     ::freeaddrinfo(rp);
+    return connected;
 }
 Socket Socket::accept() const {
     int peerSktFd;
@@ -108,6 +111,14 @@ void Socket::listen() {
     }
 }
 
+void Socket::ShutDownWR() {
+    ::shutdown(this->fd, SHUT_WR);
+}
+
+void Socket::ShutDownRD() {
+    ::shutdown(this->fd, SHUT_RD);
+}
+
 /* Cliente */
 struct addrinfo* Socket::_getAddrInfo(const char* host, const char* port) {
     struct addrinfo hints, *result;
@@ -134,7 +145,7 @@ struct addrinfo* Socket::_getAddrInfo(const char *port) {
     hints.ai_flags = AI_PASSIVE;    	/* AI_PASSIVE for server           */
     hints.ai_protocol = 0;          	/* Any protocol */
 
-    int s = getaddrinfo(NULL, port, &hints, &result);
+    int s = ::getaddrinfo(NULL, port, &hints, &result);
     if (s != 0) {
         throw SocketException(strerror(errno));
     }
@@ -142,7 +153,7 @@ struct addrinfo* Socket::_getAddrInfo(const char *port) {
 }
 
 void Socket::close() {
-    ::shutdown(this->fd, SHUT_RDWR); //SHUT_RDWR???????
+    ::shutdown(this->fd, SHUT_RDWR);
     ::close(this->fd);
 }
 
@@ -151,7 +162,7 @@ bool Socket::isValid() {
 }
 
 Socket::~Socket() {
-    if (this->fd == -1) {
-        this->close(); //ojo
+    if (this->fd != -1) {
+        this->close();
     }
 }

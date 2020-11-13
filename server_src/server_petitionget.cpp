@@ -1,17 +1,19 @@
 #include "server_petitionget.h"
 #include <cstring>
 #include <fstream>
-#include <iostream>//borrar
 
-PetitionGet::PetitionGet(char* input, char* output, std::string resource) : Petition(input, output) {
+PetitionGet::PetitionGet(char* input,
+                         char* output,
+                         std::string resource) :
+                         Petition(input, output) {
     this->resource = resource;
 }
 
 int PetitionGet::solve() {
-    if (this->input[5] == ' ') {  //GET sin "resource" especificado
+    if (this->input[5] == ' ') {  // GET sin "resource" especificado
         return  loadRootResource();
     } else {
-        return loadRequest();  //GET con "resource" especificado
+        return loadRequest();  // GET con "resource" especificado
     }
 }
 
@@ -19,11 +21,11 @@ int PetitionGet::loadRootResource() {
     char c;
     int len = 0;
     char response[] = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
-    strncpy(this->output, response, strlen(response));
+    strcpy(this->output, response);
     std::fstream root;
     root.open(this->resource);
 
-    while (root.get(c)){
+    while (root.get(c)) {
         this->output[strlen(response) + len] = c;
         len++;
     }
@@ -37,18 +39,18 @@ int PetitionGet::loadRequest() {
     std::string resourceName = _getResourceName();
     char responseOk[] = "HTTP/1.1 200 OK\n\n";
     char responseFail[] = "HTTP/1.1 404 NOT FOUND\n\n";
-    if (std::ifstream(resourceName)){
-        strncpy(this->output, responseOk, strlen(responseOk));
+    if (std::ifstream(resourceName)) {
+        strcpy(this->output, responseOk);
         std::fstream root;
         root.open(resourceName);
-        while (root.get(c)){
+        while (root.get(c)) {
             this->output[strlen(responseOk) + len] = c;
             len++;
         }
         root.close();
         return strlen(responseOk) + len;
     } else {
-        strncpy(this->output, responseFail, strlen(responseFail));
+        strcpy(this->output, responseFail);
         return strlen(responseFail);
     }
 }
