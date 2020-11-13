@@ -5,9 +5,9 @@
 #include <string>
 
 class PetitionPost : public Petition {
-private:
+ private:
     int msgLen;
-public:
+ public:
     /* Constructor */
     PetitionPost(char* input, char* output, int msgLen);
 
@@ -18,7 +18,7 @@ public:
     /* Destructor */
     ~PetitionPost();
 
-private:
+ private:
     /* Resuelve la peticion para el caso en el que "resource"
      * no esta especificado */
     int _emptyPost();
