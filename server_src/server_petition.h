@@ -10,6 +10,7 @@ class Petition {
     /* Constructor */
     Petition(char* input, char* output);
 
+    /* Este metodo es implementado por las clases hijas */
     virtual int solve() = 0;
 
     /* Destructor */

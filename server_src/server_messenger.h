@@ -1,8 +1,6 @@
 #ifndef SERVER_SRC_SERVER_MESSENGER_H_
 #define SERVER_SRC_SERVER_MESSENGER_H_
 
-
-
 #include "server_petitionsolver.h"
 #include "server_thread.h"
 #include "../common_src/common_socket.h"
@@ -27,15 +25,18 @@ class Messenger : public Thread {
     /* Asignacion por copia borrado*/
     Messenger operator=(const Messenger& messenger) = delete;
 
+    /* Recibe el petitorio HTTP del cliente y envia la respuesta */
     void solve() override;
 
+    /* Devuelve true si ya se termino de procesar y enviar la respuesta
+     * al petitorio */
     bool finished() override;
 
     /* Destructor */
     ~Messenger();
 
  private:
-    /* Imprime la primer linea del petitorio */
+    /* Imprime por pantalla la primer linea del petitorio */
     void _printFirstLine();
 };
 

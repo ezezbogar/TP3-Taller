@@ -11,7 +11,7 @@ class Thread {
     /* Constructor */
     Thread();
 
-    /* Ejecuta el thread con el metodo abstracto verificar, que sera
+    /* Ejecuta el thread con el metodo abstracto solve, que sera
      * implementado por las clases hijas */
     void start();
 

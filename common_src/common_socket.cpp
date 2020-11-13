@@ -8,8 +8,8 @@ Socket::Socket() {
     this->fd = -1;
 }
 
-Socket::Socket(int Fd) {
-    this->fd = Fd;
+Socket::Socket(int fd) {
+    this->fd = fd;
 }
 
 Socket::Socket(Socket &&skt) noexcept {

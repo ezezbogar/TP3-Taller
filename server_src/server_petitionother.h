@@ -9,6 +9,8 @@ class PetitionOther : public Petition {
     /* Constructor */
     PetitionOther(char* input, char* output);
 
+    /* Resuelve la peticion del cliente para el caso en que
+     * el metodo sea otro diferente a GET y POST */
     int solve() override;
 
     /* Destructor */

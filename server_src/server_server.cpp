@@ -38,6 +38,8 @@ void Server::_createClient(Socket& peer) {
     this->clients.back()->start();
 }
 
+/* Devuelve true si el Thread termino su ejecucion, false en
+ * caso contrario */
 bool _clientHasFinished(Thread* client) {
     if (client->finished() == true) {
         client->join();

@@ -66,4 +66,5 @@ std::string PetitionGet::_getResourceName() {
     std::string name(this->input + 5, len);
     return name;
 }
+
 PetitionGet::~PetitionGet() {}
