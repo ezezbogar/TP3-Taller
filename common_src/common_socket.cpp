@@ -23,27 +23,32 @@ Socket& Socket::operator=(Socket&& skt)  noexcept {
     return *this;
 }
 
-void Socket::bind(const char *port) {
+bool Socket::bind(const char *port) {
     struct addrinfo* rp = _getAddrInfo(port);
+    int binded = false;
 
     for (; rp != NULL; rp = rp->ai_next) {
         this->fd = ::socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
         if (this->fd == -1) {
-            std::cerr << strerror(errno) << std::endl;
+            continue;
         } else {
             int val = 1;
             ::setsockopt(this->fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
 
-            if (::bind(this->fd, rp->ai_addr, rp->ai_addrlen) == 0) {
-                break;
-            } else {
-                std::cerr << strerror(errno) << std::endl;
+            if (::bind(this->fd, rp->ai_addr, rp->ai_addrlen) == -1) {
                 ::close(this->fd);
+            } else {
+                binded = true;
+                break;
             }
         }
     }
     ::freeaddrinfo(rp);
+    if (rp == NULL) {
+        throw SocketException("Could not bind to any address");
+    }
+    return binded;
 }
 
 bool Socket::connect(const char *host, const char *port) {
@@ -54,16 +59,18 @@ bool Socket::connect(const char *host, const char *port) {
         this->fd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
         if (this->fd == -1) {
-            std::cout << strerror(errno) << std::endl;
+            continue;
         } else if (::connect(this->fd , rp->ai_addr, rp->ai_addrlen) == -1) {
-            std::cout << strerror(errno) << std::endl;
             ::close(this->fd);
         } else {
             connected = true;
-            break;
+            break;  /* Connected */
         }
     }
     ::freeaddrinfo(rp);
+    if (rp == NULL) {
+        throw SocketException("Could not connect to any address");
+    }
     return connected;
 }
 Socket Socket::accept() const {

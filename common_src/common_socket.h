@@ -28,7 +28,7 @@ class Socket {
     Socket operator=(const Socket& skt) = delete;
 
     /* Hace el bind del socket para el puerto especificado */
-    void bind(const char *port);
+    bool bind(const char *port);
 
     /* Conecta el socket a algun peer del servidor. Devuelve -1 ante algun
      * error, 0 en caso de exito */
