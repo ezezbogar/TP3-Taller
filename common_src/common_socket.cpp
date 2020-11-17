@@ -40,7 +40,7 @@ bool Socket::bind(const char *port) {
                 ::close(this->fd);
             } else {
                 binded = true;
-                break;
+                break;  /* Binded */
             }
         }
     }
@@ -73,6 +73,7 @@ bool Socket::connect(const char *host, const char *port) {
     }
     return connected;
 }
+
 Socket Socket::accept() const {
     int peerSktFd;
     peerSktFd = ::accept(this->fd, NULL, NULL);
