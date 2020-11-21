@@ -1,7 +1,6 @@
 #include "server_petitionpost.h"
-#include <fstream>
-#include <cstring>
-#include <cstdio>
+#include <fstream>//borrar
+#include <string>
 
 PetitionPost::PetitionPost(char* input,
                            char* output,
@@ -19,21 +18,21 @@ int PetitionPost::solve() {
 }
 
 int PetitionPost::_emptyPost() {
-    char response[] = "HTTP/1.1 403 FORBIDDEN\n\n";
-    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 403 FORBIDDEN\n\n");
-    return strlen(response);
+    std::string response = "HTTP/1.1 403 FORBIDDEN\n\n";
+    response.copy(this->output, response.size(), 0);
+    return response.size();
 }
 
 int PetitionPost::_postResource() {
-    char response[] = "HTTP/1.1 200 OK\n\n";
+    std::string response = "HTTP/1.1 200 OK\n\n";
     std::string fileName = _getPostName();
     bool newLine = false;
-    snprintf(this->output, strlen(response) + 1, "HTTP/1.1 200 OK\n\n");
     int bodyBegin = 0;
 
+    response.copy(this->output, response.size(), 0);
     for (int i = 0; i < this->msgLen; i++) {
         if (this->input[i] == '\n' && newLine == true) {
-            _writeFile(i + 1, fileName, strlen(response));
+            _writeFile(i + 1, fileName, response.size());
             bodyBegin = i +1;
             break;
         } else if (this->input[i] == '\n') {
@@ -42,7 +41,7 @@ int PetitionPost::_postResource() {
             newLine = false;
         }
     }
-    return (strlen(response) + this->msgLen - bodyBegin);
+    return (response.size() + this->msgLen - bodyBegin);
 }
 
 void PetitionPost::_writeFile(int bodyStart,

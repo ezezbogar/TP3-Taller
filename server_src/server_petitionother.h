@@ -2,7 +2,6 @@
 #define SERVER_SRC_SERVER_PETITIONOTHER_H_
 
 #include "server_petition.h"
-#include <string>
 
 class PetitionOther : public Petition {
  public:

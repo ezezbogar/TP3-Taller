@@ -1,6 +1,6 @@
 #include "server_petitionget.h"
-#include <cstring>
-#include <fstream>
+#include <fstream>//borrar
+#include <string>
 
 PetitionGet::PetitionGet(char* input,
                          char* output,
@@ -20,18 +20,17 @@ int PetitionGet::solve() {
 int PetitionGet::loadRootResource() {
     char c;
     int len = 0;
-    char response[] = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
-    snprintf(this->output, strlen(response) + 1,
-             "HTTP/1.1 200 OK\nContent-Type: text/html\n\n");
+    std::string response = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
+    response.copy(this->output, response.size(), 0);
     std::fstream root;
     root.open(this->resource);
 
     while (root.get(c)) {
-        this->output[strlen(response) + len] = c;
+        this->output[response.size() + len] = c;
         len++;
     }
     root.close();
-    return strlen(response) + len;
+    return response.size() + len;
 }
 
 int PetitionGet::loadRequest() {
@@ -39,21 +38,20 @@ int PetitionGet::loadRequest() {
     if (std::ifstream(resourceName)) {
         char c;
         int len = 0;
-        char responseOk[] = "HTTP/1.1 200 OK\n\n";
-        snprintf(this->output, strlen(responseOk) + 1, "HTTP/1.1 200 OK\n\n");
+        std::string responseOk = "HTTP/1.1 200 OK\n\n";
+        responseOk.copy(this->output, responseOk.size(), 0);
         std::fstream root;
         root.open(resourceName);
         while (root.get(c)) {
-            this->output[strlen(responseOk) + len] = c;
+            this->output[responseOk.size() + len] = c;
             len++;
         }
         root.close();
-        return strlen(responseOk) + len;
+        return (responseOk.size() + len);
     } else {
-        char responseFail[] = "HTTP/1.1 404 NOT FOUND\n\n";
-        snprintf(this->output, strlen(responseFail) + 1,
-                 "HTTP/1.1 404 NOT FOUND\n\n");
-        return strlen(responseFail);
+        std::string responseFail = "HTTP/1.1 404 NOT FOUND\n\n";
+        responseFail.copy(this->output, responseFail.size(), 0);
+        return responseFail.size();
     }
 }
 
