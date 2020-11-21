@@ -1,4 +1,5 @@
 #include "client_client.h"
+#include <iostream>
 
 #define BUFFER_SIZE 64
 
@@ -14,8 +15,8 @@ void Client::sendPetition() {
     if (this->connected == true) {
         char buffer[BUFFER_SIZE];
         while (!feof(stdin)) {
-            size_t result = fread(buffer, sizeof(char), BUFFER_SIZE, stdin);
-            this->ClientSocket.send(buffer, static_cast<int>(result));
+            std::cin.read(buffer, BUFFER_SIZE);
+            this->ClientSocket.send(buffer, static_cast<int>(std::cin.gcount()));
         }
         this->ClientSocket.ShutDownWR();
     }
@@ -27,7 +28,7 @@ void Client::receiveReply() {
         char buffer[BUFFER_SIZE];
         do {
             bytes_received = this->ClientSocket.receive(buffer, BUFFER_SIZE);
-            fwrite(buffer, sizeof(char), bytes_received, stdout);
+            std::cout.write(buffer, bytes_received);
         } while (bytes_received != 0);
         this->ClientSocket.ShutDownRD();
     }
