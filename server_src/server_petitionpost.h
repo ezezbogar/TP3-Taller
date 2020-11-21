@@ -1,5 +1,5 @@
-#ifndef PETITIONPOST_H_
-#define PETITIONPOST_H_
+#ifndef SERVER_SRC_SERVER_PETITIONPOST_H_
+#define SERVER_SRC_SERVER_PETITIONPOST_H_
 
 #include "server_petition.h"
 #include <string>
@@ -7,7 +7,7 @@
 class PetitionPost : public Petition {
  private:
     int msgLen;
-    
+
  public:
     /* Constructor */
     PetitionPost(char* input, char* output, int msgLen);
@@ -36,4 +36,4 @@ class PetitionPost : public Petition {
     std::string _getPostName();
 };
 
-#endif  // PETITIONPOST_H_
+#endif  // SERVER_SRC_SERVER_PETITIONPOST_H_
