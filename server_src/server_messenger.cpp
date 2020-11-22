@@ -1,5 +1,4 @@
 #include "server_messenger.h"
-#include <iostream>
 #include <string>
 #include <utility>
 
@@ -23,17 +22,17 @@ void Messenger::solve() {
     replyLen = petitionSolver.solve();
     this->peer.send(this->output, replyLen);
     this->peer.ShutDownWR();
-
     this->clientFinished = true;
 }
 
 void Messenger::_printFirstLine() {
+    std::string screenBuf;
     int i = 0;
     while (this->input[i] != '\n') {
-        std::cout << this->input[i];
+        screenBuf.append(&this->input[i], 1);
         i++;
     }
-    std::cout << std::endl;
+    system.printOnScreen(screenBuf);
 }
 
 bool Messenger::finished() {

@@ -39,7 +39,7 @@ void System::loadFile(std::string& fileName, std::string& file) {
 
 void System::printOnScreen(std::string& str) {
     std::unique_lock<std::mutex> lck(this->stdoutMtx);
-    std::cout << str;
+    std::cout << str << std::endl;
 }
 
 std::string System::getRootFile() {
