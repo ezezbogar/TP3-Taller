@@ -6,7 +6,7 @@
 
 #define ENDING_CHAR 'q'
 
-Server::Server(const std::string& rootFile) {
+Server::Server(const std::string& rootFile) : system(rootFile) {
     this->endAccepting = false;
     this->rootFile = rootFile;
 }
@@ -38,7 +38,7 @@ void Server::_acceptClients() {
 }
 
 void Server::_createClient(Socket& peer) {
-    this->clients.push_back(new Messenger(this->rootFile, std::move(peer)));
+    this->clients.push_back(new Messenger(this->rootFile, std::move(peer), this->system));
     this->clients.back()->start();
 }
 

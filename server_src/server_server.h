@@ -4,6 +4,7 @@
 #include "../common_src/common_socket.h"
 #include "server_thread.h"
 #include "server_messenger.h"
+#include "server_system.h"
 #include <vector>
 #include <atomic>
 #include <string>
@@ -15,6 +16,7 @@ class Server {
     std::thread endCharThread;
     std::string rootFile;
     std::atomic<bool> endAccepting;
+    System system;
 
  public:
     /* Constructor */

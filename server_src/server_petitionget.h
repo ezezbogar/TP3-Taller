@@ -2,15 +2,16 @@
 #define SERVER_SRC_SERVER_PETITIONGET_H_
 
 #include "server_petition.h"
+#include "server_system.h"
 #include <string>
 
 class PetitionGet : public Petition {
  private:
-    std::string resource;
+    System& system;
 
  public:
     /* Constructor */
-    PetitionGet(char* input, char* output, const std::string& resource);
+    PetitionGet(char* input, char* output, System& system);
 
     /* Resuelve la peticion del cliente para el caso en que el
      * metodo sea GET */

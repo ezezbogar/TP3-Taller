@@ -7,13 +7,13 @@
 
 PetitionSolver::PetitionSolver(char* input,
                                char* output,
-                               std::string resource,
+                               System& system,
                                int msgLen) {
     int petitionType = _getPetitionType(input);
     if (petitionType == GET) {
-        this->petition = new PetitionGet(input, output, resource);
+        this->petition = new PetitionGet(input, output, system);
     } else if (petitionType == POST) {
-        this->petition = new PetitionPost(input, output, msgLen);
+        this->petition = new PetitionPost(input, output, msgLen, system);
     } else if (petitionType == OTHER) {
         this->petition = new PetitionOther(input, output);
     }

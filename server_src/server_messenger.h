@@ -4,20 +4,21 @@
 #include "server_petitionsolver.h"
 #include "server_thread.h"
 #include "../common_src/common_socket.h"
+#include "server_system.h"
 #include <string>
 
 class Messenger : public Thread {
  private:
     Socket peer;
-    std::string rootFile;
     bool clientFinished;
+    System& system;
 
     char* input;
     char* output;
 
  public:
     /* Constructor */
-    Messenger(const std::string& rootFile, Socket&& peer);
+    Messenger(const std::string& rootFile, Socket&& peer, System& system);
 
     /* Constructor por copia borrado*/
     Messenger(const Messenger& messenger) = delete;

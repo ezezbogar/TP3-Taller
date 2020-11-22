@@ -4,8 +4,9 @@
 
 PetitionPost::PetitionPost(char* input,
                            char* output,
-                           int msgLen) :
-                           Petition(input, output) {
+                           int msgLen,
+                           System& system) :
+                           Petition(input, output), system(system) {
     this->msgLen = msgLen;
 }
 
@@ -33,7 +34,7 @@ int PetitionPost::_postResource() {
     for (int i = 0; i < this->msgLen; i++) {
         if (this->input[i] == '\n' && newLine == true) {
             _writeFile(i + 1, fileName, response.size());
-            bodyBegin = i +1;
+            bodyBegin = i + 1;
             break;
         } else if (this->input[i] == '\n') {
             newLine = true;
@@ -47,13 +48,12 @@ int PetitionPost::_postResource() {
 void PetitionPost::_writeFile(int bodyStart,
                               std::string fileName,
                               int headerLen) {
-    std::ofstream post;
-    post.open(fileName);
+
     for (int i = 0; i < this->msgLen - bodyStart; i++) {
-        post << this->input[i + bodyStart];
         this->output[headerLen + i] = this->input[i + bodyStart];
     }
-    post.close();
+    std::string file(this->input + bodyStart, this->msgLen - bodyStart);
+    this->system.loadFile(fileName, file);
 }
 
 std::string PetitionPost::_getPostName() {

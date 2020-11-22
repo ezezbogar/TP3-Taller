@@ -2,15 +2,17 @@
 #define SERVER_SRC_SERVER_PETITIONPOST_H_
 
 #include "server_petition.h"
+#include "server_system.h"
 #include <string>
 
 class PetitionPost : public Petition {
  private:
     int msgLen;
+    System& system;
 
  public:
     /* Constructor */
-    PetitionPost(char* input, char* output, int msgLen);
+    PetitionPost(char* input, char* output, int msgLen, System& system);
 
     /* Resuelve la peticion del cliente para el caso en que
      * el metodo sea POST */

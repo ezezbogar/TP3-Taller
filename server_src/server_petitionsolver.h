@@ -5,6 +5,7 @@
 #include "server_petitionget.h"
 #include "server_petitionpost.h"
 #include "server_petitionother.h"
+#include "server_system.h"
 #include <string>
 
 class PetitionSolver {
@@ -13,7 +14,7 @@ class PetitionSolver {
 
  public:
     /* Constructor */
-    PetitionSolver(char* input, char* output, std::string resource, int msgLen);
+    PetitionSolver(char* input, char* output, System& system, int msgLen);
 
     /* Constructor por copia borrado */
     PetitionSolver(const PetitionSolver& petitionSolver) = delete;

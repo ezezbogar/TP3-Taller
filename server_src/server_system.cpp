@@ -9,6 +9,7 @@ System::System(std::string rootFile) {
     std::string file;
     char buf[BUF_SIZE];
 
+    this->rootFile = rootFile;
     root.open(rootFile);
     while (!root.eof()) {
         root.read(buf, BUF_SIZE);
@@ -39,6 +40,10 @@ void System::loadFile(std::string& fileName, std::string& file) {
 void System::printOnScreen(std::string& str) {
     std::unique_lock<std::mutex> lck(this->stdoutMtx);
     std::cout << str;
+}
+
+std::string System::getRootFile() {
+    return this->rootFile;
 }
 
 System::~System() {}

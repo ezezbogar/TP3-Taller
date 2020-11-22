@@ -7,6 +7,7 @@
 class System {
  private:
     std::map<std::string,std::string> hardDrive;
+    std::string rootFile;
     std::mutex getFileMtx;
     std::mutex loadFileMtx;
     std::mutex stdoutMtx;
@@ -20,6 +21,8 @@ class System {
     void loadFile(std::string& fileName, std::string& file);
 
     void printOnScreen(std::string& str);
+
+    std::string getRootFile();
 
     /* Destructor */
     ~System();

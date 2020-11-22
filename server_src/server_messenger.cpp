@@ -5,9 +5,9 @@
 
 #define MEMORY_SIZE 1024
 
-Messenger::Messenger(const std::string& rootFile, Socket&& peer) {
+Messenger::Messenger(const std::string& rootFile, Socket&& peer,
+                     System& system) : system(system){
     this->peer = std::move(peer);
-    this->rootFile = rootFile;
     this->clientFinished = false;
     this->input = new char[MEMORY_SIZE];
     this->output = new char[MEMORY_SIZE];
@@ -19,7 +19,7 @@ void Messenger::solve() {
     _printFirstLine();
 
     PetitionSolver petitionSolver(this->input,
-                                  this->output, this->rootFile, msgLen);
+                                  this->output, this->system, msgLen);
     replyLen = petitionSolver.solve();
     this->peer.send(this->output, replyLen);
     this->peer.ShutDownWR();
