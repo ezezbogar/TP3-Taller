@@ -2,17 +2,17 @@
 #include <fstream>
 #include <iostream>
 
-#define BUF_SIZE 128
+#define BUFFER_SIZE 128
 
 System::System(std::string rootFile) {
     std::fstream root;
     std::string file;
-    char buf[BUF_SIZE];
+    char buf[BUFFER_SIZE];
 
     this->rootFile = rootFile;
     root.open(rootFile);
     while (!root.eof()) {
-        root.read(buf, BUF_SIZE);
+        root.read(buf, BUFFER_SIZE);
         file.append(buf, root.gcount());
     }
     root.close();
