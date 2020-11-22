@@ -32,7 +32,7 @@ class PetitionPost : public Petition {
 
     /* Crea un archivo con el nombre del resource y el contenido es el
      * body del petitorio */
-    void _writeFile(int bodyStart, std::string fileName, int headerLen);
+    void _writeFile(int bodyStart, const std::string& fileName, int headerLen);
 
     /* Devuelve el nombre del "resource" de la peticion */
     std::string _getPostName();

@@ -1,5 +1,4 @@
 #include "server_petitionget.h"
-#include <fstream>//borrar
 #include <string>
 
 PetitionGet::PetitionGet(char* input,

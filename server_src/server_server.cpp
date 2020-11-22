@@ -38,7 +38,8 @@ void Server::_acceptClients() {
 }
 
 void Server::_createClient(Socket& peer) {
-    this->clients.push_back(new Messenger(this->rootFile, std::move(peer), this->system));
+    this->clients.push_back(new Messenger(this->rootFile,
+                                          std::move(peer), this->system));
     this->clients.back()->start();
 }
 

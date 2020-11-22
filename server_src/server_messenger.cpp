@@ -5,7 +5,7 @@
 #define MEMORY_SIZE 1024
 
 Messenger::Messenger(const std::string& rootFile, Socket&& peer,
-                     System& system) : system(system){
+                     System& system) : system(system) {
     this->peer = std::move(peer);
     this->clientFinished = false;
     this->input = new char[MEMORY_SIZE];

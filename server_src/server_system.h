@@ -3,10 +3,11 @@
 
 #include <map>
 #include <mutex>
+#include <string>
 
 class System {
  private:
-    std::map<std::string,std::string> hardDrive;
+    std::map<std::string, std::string> hardDrive;
     std::string rootFile;
     std::mutex getFileMtx;
     std::mutex loadFileMtx;
@@ -14,13 +15,13 @@ class System {
 
  public:
     /* Constructor */
-    System(std::string rootFile);
+    explicit System(std::string rootFile);
 
     std::string getFile(std::string fileName);
 
-    void loadFile(std::string& fileName, std::string& file);
+    void loadFile(const std::string& fileName, const std::string& file);
 
-    void printOnScreen(std::string& str);
+    void printOnScreen(const std::string& str);
 
     std::string getRootFile();
 

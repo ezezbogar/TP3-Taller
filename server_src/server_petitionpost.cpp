@@ -1,5 +1,4 @@
 #include "server_petitionpost.h"
-#include <fstream>//borrar
 #include <string>
 
 PetitionPost::PetitionPost(char* input,
@@ -46,9 +45,8 @@ int PetitionPost::_postResource() {
 }
 
 void PetitionPost::_writeFile(int bodyStart,
-                              std::string fileName,
+                              const std::string& fileName,
                               int headerLen) {
-
     for (int i = 0; i < this->msgLen - bodyStart; i++) {
         this->output[headerLen + i] = this->input[i + bodyStart];
     }

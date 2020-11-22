@@ -1,13 +1,14 @@
 #ifndef SERVER_SRC_SERVER_SERVER_H_
 #define SERVER_SRC_SERVER_SERVER_H_
 
+#include <vector>
+#include <atomic>
+#include <string>
 #include "../common_src/common_socket.h"
 #include "server_thread.h"
 #include "server_messenger.h"
 #include "server_system.h"
-#include <vector>
-#include <atomic>
-#include <string>
+
 
 class Server {
  private:

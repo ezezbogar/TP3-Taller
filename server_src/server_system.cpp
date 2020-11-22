@@ -22,7 +22,7 @@ System::System(std::string rootFile) {
 
 std::string System::getFile(std::string fileName) {
     std::unique_lock<std::mutex> lck(this->getFileMtx);
-    std::map<std::string,std::string>::iterator it;
+    std::map<std::string, std::string>::iterator it;
     std::string emptyString;
 
     it = this->hardDrive.find(fileName);
@@ -32,12 +32,12 @@ std::string System::getFile(std::string fileName) {
     return emptyString;
 }
 
-void System::loadFile(std::string& fileName, std::string& file) {
+void System::loadFile(const std::string& fileName, const std::string& file) {
     std::unique_lock<std::mutex> lck(this->loadFileMtx);
     this->hardDrive[fileName] = file;
 }
 
-void System::printOnScreen(std::string& str) {
+void System::printOnScreen(const std::string& str) {
     std::unique_lock<std::mutex> lck(this->stdoutMtx);
     std::cout << str << std::endl;
 }
