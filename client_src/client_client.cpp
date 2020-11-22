@@ -16,7 +16,8 @@ void Client::sendPetition() {
         char buffer[BUFFER_SIZE];
         while (!feof(stdin)) {
             std::cin.read(buffer, BUFFER_SIZE);
-            this->ClientSocket.send(buffer, static_cast<int>(std::cin.gcount()));
+            this->ClientSocket.send(buffer,
+                                    static_cast<int>(std::cin.gcount()));
         }
         this->ClientSocket.ShutDownWR();
     }
