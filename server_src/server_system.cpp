@@ -21,7 +21,7 @@ System::System(std::string rootFile) {
 }
 
 std::string System::getFile(std::string fileName) {
-    std::unique_lock<std::mutex> lck(this->getFileMtx);
+    std::unique_lock<std::mutex> lck(this->FilesMtx);
     std::map<std::string, std::string>::iterator it;
     std::string emptyString;
 
@@ -33,7 +33,7 @@ std::string System::getFile(std::string fileName) {
 }
 
 void System::loadFile(const std::string& fileName, const std::string& file) {
-    std::unique_lock<std::mutex> lck(this->loadFileMtx);
+    std::unique_lock<std::mutex> lck(this->FilesMtx);
     this->hardDrive[fileName] = file;
 }
 

@@ -9,8 +9,7 @@ class System {
  private:
     std::map<std::string, std::string> hardDrive;
     std::string rootFile;
-    std::mutex getFileMtx;
-    std::mutex loadFileMtx;
+    std::mutex FilesMtx;
     std::mutex stdoutMtx;
 
  public:
