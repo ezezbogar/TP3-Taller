@@ -29,3 +29,23 @@
 
 
 - Link al repositorio de GitHub: https://github.com/ezezbogar/TP3-Taller
+
+#### Reentrega
+
+​	A continuación se listan los cambios realizados para la reentrega:
+
+##### Issue 1: En C++ hay que usar las estructuras de archivos de la STL
+
+​	Se cambio de las funciones de C para manejo de archivos a las funciones (métodos) de la biblioteca estándar de C++.
+
+##### Issue 2: Usar exceptions
+
+​	Ahora se utilizan excepciones donde antes se utilizaba la salida estándar para errores (std::cerr).
+
+##### Issue 3: Usar las estructuras de C++
+
+​	Se dejan de lado las funciones de la biblioteca "cstring" nativas de C a cambio de la biblioteca "string" de C++ con sus respectivos métodos.
+
+##### Issue 4: Te complicaste un montón, había que guardar strings en memoria nada más, no escribir en el file system
+
+​	Se paso a implementar el uso de un std::map<std::string, std::string> protegido para almacenar los "archivos", donde el primer término (la key) es el nombre del file y el segundo termino es el file en si. La misma clase que implementa el map ("System") permite utilizar la salida estándar de forma protegida.
