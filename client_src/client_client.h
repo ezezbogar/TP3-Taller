@@ -14,6 +14,12 @@ class Client {
     /* Constructor */
     Client(char* host, char* port);
 
+    /* Constructor por copia borrado */
+    Client(const Client& client) = delete;
+
+    /* Asignacion por copia borrado */
+    Client operator=(const Client& client) = delete;
+
     /* Se conecta a algun peer del servidor y en caso de exito envia
      * el contenido de stdin */
     void sendPetition();

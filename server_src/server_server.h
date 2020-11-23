@@ -23,6 +23,12 @@ class Server {
     /* Constructor */
     explicit Server(const std::string& rootFile);
 
+    /* Constructor por copia borrado */
+    Server(const Server& server) = delete;
+
+    /* Asignacion por copia borrado */
+    Server operator=(const Server& server) = delete;
+
     /* Comienza la ejecucion del server */
     void operator()(const char* port);
 
